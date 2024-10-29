@@ -1,0 +1,24 @@
+version: '3'
+services:
+  web:
+    build:
+      context: ./case-study-app  # Path to the 'Case-study-app' folder
+      dockerfile: Dockerfile     # Dockerfile inside 'Case-study-app'
+    ports:
+      - "80:80"
+    volumes:
+      - web-data:/usr/local/apache2/htdocs  # Persist the web content outside of the container
+
+  app:
+    build:
+      context: ./compose-application  # Path to the 'compose-application' folder
+      dockerfile: Dockerfile          # Dockerfile inside 'compose-application'
+    ports:
+      - "8080:8080"
+    volumes:
+      - app-data:/usr/local/app  # Persist the app data outside of the container
+
+volumes:
+  web-data:
+  app-data:
+
